@@ -1,10 +1,12 @@
 require('dotenv').config();
-const express = require('express');
+const cors = require('cors');
+const express = require('express')
 const mysql = require('mysql2/promise')
 const schema = require('../shared/schema.json')
 
 const { prettify } = require('../shared/debug.js')
 const app = express();
+app.use(cors());
 app.use(express.json());
 
 // create MySQL connection pool

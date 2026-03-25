@@ -21,8 +21,19 @@ export const ErrorProvider = ({ children }) => {
         const interceptor = api.interceptors.response.use(
             (res) => res,
             (err) => {
-                // Вытаскиваем текст ошибки из ответа бэкенда или статус
-                const msg = err.response?.data?.error || `Ошибка сервера (${err.response?.status || 'Сеть'})`;
+                let msg = "";
+
+                if (err.response) {
+                    // Сервер ответил, но прислал ошибку (400, 500...)
+                    msg = err.response.data?.error || `Ошибка сервера: ${err.response.status}`;
+                } else if (err.request) {
+                    // Запрос ушел, но ответа НОЛЬ (Network Error)
+                    msg = "Связь потеряна: проверь, запущен ли бэкенд и нет ли проблем с CORS";
+                } else {
+                    // Что-то совсем криво в самом коде
+                    msg = err.message;
+                }
+
                 addError(msg);
                 return Promise.reject(err);
             }
