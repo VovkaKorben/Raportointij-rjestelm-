@@ -1,0 +1,34 @@
+{
+    "boiling": {
+        "name": "Boiling",
+        "table": "boiling",
+        "summary": { "column": "volume", "unit": "l" },
+        "fields": [
+            { "name": "product_id", "label": "Product", "type": "select", "source": "/api/products", "required": true },
+            { "name": "volume", "label": "Volume (l)", "type": "number", "min": 0, "required": true },
+            { "name": "duration", "label": "Duration (min)", "type": "number", "required": true },
+            { "name": "temperature", "label": "Temp (°C)", "type": "number", "step": 0.1, "required": true },
+            { "name": "employee_id", "label": "Operator", "type": "select", "source": "/api/employees?dept=1", "required": true },
+            { "name": "notes", "label": "Notes", "type": "text", "required": false }
+        ]
+    },
+    "separating": {
+        "name": "Separating",
+        "table": "separating",
+        "fields": [ ]
+    },
+    "packaging": {
+        "name": "Packaging",
+        "table": "packaging",
+        "summary": { "column": "count", "unit": "l" },
+        "fields": [
+            { "name": "product_id", "label": "Product", "type": "select", "source": "/api/products", "required": true },
+            { "name": "count", "label": "Count (pcs)", "type": "number", "required": true },
+            { "name": "line", "label": "Line No", "type": "number", "required": true },
+            { "name": "weight", "label": "Weight (kg)", "type": "number", "required": true },
+            { "name": "employee_id", "label": "Packer", "type": "select", "source": "/api/employees?dept=2", "required": true },
+            { "name": "notes", "label": "Notes", "type": "text", "required": false }
+        ]
+    }
+
+}

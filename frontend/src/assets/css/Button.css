@@ -1,0 +1,17 @@
+button {
+    width: 200px;
+    height: 100px;
+    border: none;
+    background-color:rgb(112, 23, 196);
+    color: var(--font-color);
+    font-size: 20px;
+    gap: 10px;
+    border-radius: 12px;
+    transition: all 200ms ease;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color:  blueviolet;
+
+}

@@ -1,0 +1,45 @@
+:root {
+  --font-color: #fff;
+  text-align: left;
+}
+
+:root,
+button {
+  font-family: "Open Sans", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+  font-variation-settings:
+    "wdth" 100;
+
+}
+
+body {
+  background-color: #333;
+  color: var(--font-color);
+}
+
+.nw {
+  white-space: nowrap;
+}
+
+
+.header {
+  font-size: 40px;
+  height: 70px;
+  padding: 10px;
+}
+
+.buttons {
+  gap: 10px;
+  margin: 0px 20px;
+  overflow-x: auto
+}
+
+pre {
+  background-color: #333;
+  color: var(--font-color);
+  font-family: "Consolas", monospace;
+  font-size: 14px;
+
+}
