@@ -13,7 +13,10 @@ const ErrorContext = createContext();
 export const ErrorProvider = ({ children }) => {
     const [errors, setErrors] = useState([]);
 
-    const addError = (msg) => setErrors((prev) => [...prev, `${new Date().toLocaleTimeString()}: ${msg}`]);
+    // const addError = (msg) => setErrors((prev) => [...prev, `${new Date().toLocaleTimeString()}: ${msg}`]);
+    const addError = React.useCallback((msg) => {
+        setErrors((prev) => [...prev, `${new Date().toLocaleTimeString()}: ${msg}`]);
+    }, []);
     const clearErrors = () => setErrors([]);
 
     // 3. Инициализируем перехватчик прямо внутри провайдера
@@ -47,7 +50,7 @@ export const ErrorProvider = ({ children }) => {
     }, []);
 
     return (
-        <ErrorContext.Provider value={{ errors, clearErrors }}>
+        <ErrorContext.Provider value={{ errors, clearErrors, addError }}>
             {children}
         </ErrorContext.Provider>
     );
