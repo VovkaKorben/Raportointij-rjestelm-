@@ -1,9 +1,10 @@
+// import api from './helpers/api.js'; 
+import { useErrorLog } from './helpers/ErrorProvider.jsx';
 
-import api, { useErrorLog } from './helpers/api.jsx';
-
-import { useState, useEffect } from 'react'
+// import { useState, useEffect } from 'react'
 import './assets/css/App.css'
 import './assets/css/flex.css'
+import './assets/css/errors.css'
 
 import Button from './components/Button.jsx'
 
@@ -17,7 +18,7 @@ const Header = () => {
 
 
 function App() {
-  const { addError, errors } = useErrorLog();
+  const { errors, clearErrors } = useErrorLog();
 
 
   return (
@@ -30,9 +31,13 @@ function App() {
         <Button text="Reports" ico="analytics" />
       </div>
       <Dashboard />
-      <div className="error-log">
-        {errors.map((e, i) => <p key={i} style={{ color: 'red' }}>⚠️ {e}</p>)}
-      </div>
+      {errors.length > 0 &&
+        <div className="error-log" onClick={clearErrors}>
+
+          {errors.map((e, i) => <div key={i} className='error-line' >⚠️ {e}</div>)}
+          {/* <div className="error-close">        </div> */}
+        </div>
+      }
     </>
   )
 }

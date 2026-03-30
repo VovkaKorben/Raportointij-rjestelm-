@@ -1,0 +1,16 @@
+.error-log {
+    position: fixed;
+    right: 20px;
+    top: 20px;
+    border: 1px solid red;
+    padding: 15px;
+    background-color: rgb(35, 0, 0);
+    cursor: pointer;
+}
+
+.error-line {
+    color: red;
+
+}
+
+/* .error-close{} */

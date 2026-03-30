@@ -3,3 +3,5 @@
 *.ppk
 *node_modules*
 *.doc*
+NC/*
+.gitignore

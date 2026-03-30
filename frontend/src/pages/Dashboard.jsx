@@ -2,7 +2,8 @@ import { useState, useEffect } from 'react'
 import schema from '../../../shared/schema.json'
 import { prettify } from '../../../shared/debug.js'
 
-import api, { useErrorLog } from '../helpers/api.jsx';
+import api from '../helpers/api.js';
+// import { useErrorLog } from '../helpers/ErrorProvider.jsx';
 // import axios from 'axios'
 
 function Dashboard() {
