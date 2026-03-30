@@ -2,16 +2,23 @@ button {
     width: 200px;
     height: 100px;
     border: none;
-    background-color:rgb(112, 23, 196);
+    height: 70px;
     color: var(--font-color);
     font-size: 20px;
     gap: 10px;
     border-radius: 12px;
-    transition: all 200ms ease;
+    transition: background-color 200ms ease;
     cursor: pointer;
+    outline: none;
+    background-color: #232323;
 }
 
 button:hover {
-    background-color:  blueviolet;
+    box-shadow: 0 0 0 2px blueviolet;
+
+}
+
+.active button {
+    background-color: red;
 
 }

@@ -3,6 +3,7 @@
         "name": "Boiling",
         "table": "boiling",
         "summary": { "column": "volume", "unit": "l" },
+        "color": "#523",
         "fields": [
             { "name": "product_id", "label": "Product", "type": "select", "source": "/api/products", "required": true },
             { "name": "volume", "label": "Volume (l)", "type": "number", "min": 0, "required": true },
@@ -14,13 +15,18 @@
     },
     "separating": {
         "name": "Separating",
-        "table": "separating",
-        "fields": [ ]
+        "table": "separation",
+        "summary": { "column": "volume", "unit": "l" },
+        "color": "#550",
+        "fields": [
+
+        ]
     },
     "packaging": {
         "name": "Packaging",
         "table": "packaging",
         "summary": { "column": "count", "unit": "l" },
+        "color": "#051",
         "fields": [
             { "name": "product_id", "label": "Product", "type": "select", "source": "/api/products", "required": true },
             { "name": "count", "label": "Count (pcs)", "type": "number", "required": true },

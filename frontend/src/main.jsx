@@ -5,9 +5,9 @@ import App from './App.jsx'
 import { ErrorProvider } from './helpers/ErrorProvider.jsx';
 
 createRoot(document.getElementById('root')).render(
-  <StrictMode>
+  // <StrictMode>
     <ErrorProvider>
       <App />
     </ErrorProvider>
-  </StrictMode>,
+  // </StrictMode>
 )

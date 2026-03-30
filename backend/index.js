@@ -47,30 +47,52 @@ app.get('/api/boiling', async (req, res) => {
     }
 });
 
-app.get('/api/statistic/:departament', async (req, res) => {
-    const { departament } = req.params
-    console.log(departament)
-    const config = schema[departament]
+app.get('/api/statistic/:department', async (req, res) => {
+    const { department } = req.params
+    console.log(department)
+    const config = schema[department]
     if (!config) return res.status(404).json({ error: 'Department not found' })
     console.log(prettify(config, 1))
 
+
     try {
-        const [rows] = await pool.query(`
-             SELECT 
-                 SUM(${config.sum_column}) as total,
-                 COUNT(*) as entries_count
-             FROM ${config.table}
-         `);
-        res.status(200).json({ unit: config.unit, data: rows });
+        const sqlStat = `SELECT SUM(${config.summary.column}) as total, COUNT(*) as entries_count FROM ${config.table}`
+        const [[stat]] = await pool.query(sqlStat)
+        const sqlLastEvent = `SELECT * FROM ${config.table} ORDER by datetime LIMIT 1`
+        const [[lastEvent]] = await pool.query(sqlLastEvent)
+        const data = {
+            'statistic': stat,
+            'lastEvent': lastEvent
+        }
+
+        res.status(200).json({ unit: config.unit, data: data })
     } catch (error) {
-        res.status(500).json({ error: error.message });
+        res.status(500).json({ error: `query: ${sqlQuery}\nmsg: ${error.message}` })
     }
-    /* // Берем настройки из схемы выше
- 
-    
- 
-    */
 });
+
+app.get('/api/lastevents', async (req, res) => {
+
+
+
+
+    let result = {}
+    try {
+
+        for (department of schema) {
+            console.log(department)
+        }
+
+        /*sqlQuery = `SELECT SUM(${config.summary.column}) as total, COUNT(*) as entries_count FROM ${config.table}`
+        console.log(sqlQuery)
+        const [rows] = await pool.query(sqlQuery)
+        res.status(200).json({ unit: config.unit, data: rows })
+        */
+    } catch (error) {
+        res.status(500).json({ error: `query: ${sqlQuery}\nmsg: ${error.message}` })
+    }
+});
+
 app.post('/api/save/:type', (req, res) => {
     // Весь твой JSON от Axios уже здесь как объект
     const payload = req.body;

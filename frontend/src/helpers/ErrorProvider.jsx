@@ -1,7 +1,7 @@
-import React, { createContext, useContext, useState, useCallback, useEffect } from 'react';
-import { bridge } from './api.js';
+import React, { useState, useCallback, useEffect } from 'react';
+import { bridge, ErrorContext } from './api.js';
 
-const ErrorContext = createContext();
+// const ErrorContext = createContext();
 
 export const ErrorProvider = ({ children }) => {
     const [errors, setErrors] = useState([]);
@@ -31,4 +31,4 @@ export const ErrorProvider = ({ children }) => {
     );
 };
 
-export const useErrorLog = () => useContext(ErrorContext);
+// export const useErrorLog = () => useContext(ErrorContext);
