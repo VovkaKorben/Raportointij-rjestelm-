@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import schema from '../../../shared/schema.json'
 import { prettify } from '../../../shared/debug.js'
 
@@ -7,17 +7,26 @@ import api, { useErrorLog } from '../helpers/api.jsx';
 
 function Dashboard() {
 
-    // retrieve statistic for each department
-    const getStat = async () => {
-        const result = {}
-        for (const dep in schema) {
-            const res = await api.get(`statistic/${dep}`);
-            result[dep] = res.data
+    const [stat, setStat] = useState({});
+    useEffect(() => {
+        const fetchStat = async () => {
+            try {
+                const result = {}
+                for (const dep in schema) {
+                    const res = await api.get(`statistic/${dep}`);
+                    result[dep] = res.data;
+                }
+                setStat(result);
+            } catch (err) {
+                console.error(err.message)
+                // Ошибка уже попала в addError через интерцептор,
+                // здесь мы просто гасим её, чтобы не было Uncaught в консоли.
+            }
         };
-        return result
-    }
+        fetchStat();
+    }, []);
 
-    const stat = getStat()
+
 
     return (
         <div>Production statistic

@@ -27,8 +27,11 @@ export const ErrorProvider = ({ children }) => {
                     // Сервер ответил, но прислал ошибку (400, 500...)
                     msg = err.response.data?.error || `Ошибка сервера: ${err.response.status}`;
                 } else if (err.request) {
-                    // Запрос ушел, но ответа НОЛЬ (Network Error)
-                    msg = "Связь потеряна: проверь, запущен ли бэкенд и нет ли проблем с CORS";
+                    if (err.code === 'ECONNABORTED') {
+                        msg = "Время ожидания истекло: сервер отвечает слишком долго";
+                    } else {
+                        msg = "Связь потеряна: проверь, запущен ли бэкенд и нет ли проблем с CORS";
+                    }
                 } else {
                     // Что-то совсем криво в самом коде
                     msg = err.message;
