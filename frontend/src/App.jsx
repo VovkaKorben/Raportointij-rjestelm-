@@ -1,7 +1,6 @@
-// import api from './helpers/api.js'; 
 import { useErrorLog } from './helpers/ErrorProvider.jsx';
+import { BrowserRouter as Router, Routes, Route, NavLink } from 'react-router-dom';
 
-// import { useState, useEffect } from 'react'
 import './assets/css/App.css'
 import './assets/css/flex.css'
 import './assets/css/errors.css'
@@ -22,15 +21,24 @@ function App() {
 
 
   return (
-    <>
+    <Router>
 
       <Header />
       <div className='buttons frlc'>
-        <Button text="Dashboard" ico="dashboard" />
+        <NavLink to="/" >
+          <Button text="Dashboard" ico="dashboard" />
+        </NavLink>
+
         <Button text="Data enter" ico="forms" />
         <Button text="Reports" ico="analytics" />
       </div>
-      <Dashboard />
+      <Routes>
+        <Route path="/" element={<Dashboard />} />
+        <Route path="/enter" element={<div style={{ padding: '20px' }}>Здесь будет форма ввода данных</div>} />
+        <Route path="/reports" element={<div style={{ padding: '20px' }}>Здесь будут отчеты</div>} />
+      </Routes>
+
+
       {errors.length > 0 &&
         <div className="error-log" onClick={clearErrors}>
 
@@ -38,7 +46,7 @@ function App() {
           {/* <div className="error-close">        </div> */}
         </div>
       }
-    </>
+    </Router>
   )
 }
 

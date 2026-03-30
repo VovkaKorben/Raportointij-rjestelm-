@@ -13,10 +13,17 @@ export const ErrorProvider = ({ children }) => {
     const clearErrors = () => setErrors([]);
 
     useEffect(() => {
-        bridge.notify = addError;
-        return () => { bridge.notify = null; };
-    }, [addError]);
+        // Подключаем актуальный обработчик
+        bridge.add = addError;
 
+        // Если в очереди уже что-то накопилось (ошибки "до всего") — выводим
+        if (bridge.queue.length > 0) {
+            bridge.queue.forEach(msg => addError(msg));
+            bridge.queue = [];
+        }
+
+        return () => { bridge.add = null; };
+    }, [addError]);
     return (
         <ErrorContext.Provider value={{ errors, addError, clearErrors }}>
             {children}
